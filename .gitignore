@@ -12,6 +12,8 @@ media
 # Backup files # 
 *.bak 
 
+# this is my branch
+
 # If you are using PyCharm # 
 # User-specific stuff
 .idea/**/workspace.xml
