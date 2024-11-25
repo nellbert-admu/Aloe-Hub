@@ -1,9 +1,9 @@
-# users/urls.py
-
 from django.urls import path
-from . import views  # Import views when you have them
+from . import views
 
 urlpatterns = [
-    # For now, add a simple placeholder path
-    path('', views.home, name='user-home'),  # Assuming you have a 'home' view in 'users/views.py'
+    path('', views.home, name='home'), 
+    path('register/', views.register, name='register'),
+    path('login/', views.user_login, name='login'),
+    path('logout/', views.user_logout, name='logout'),
 ]
