@@ -125,3 +125,4 @@ celerybeat-schedule.*
 # Ignore unnecessary files
 *.log.*
 *.tmp
+*.pyc
