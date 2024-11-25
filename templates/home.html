@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+    <h1>Welcome to ALOE Hub</h1>
+    <p>Your one-stop platform for all Atenean-led organizational events.</p>
+
+    {% if user.is_authenticated %}
+        <h2>Upcoming Events</h2>
+        <ul>
+            <!-- Example event listing, replace with dynamic content -->
+            <li>
+                <h3>Event Title</h3>
+                <p>Date: January 1, 2025</p>
+                <p>Description: This is a brief description of the event.</p>
+                <a href="">More details</a>
+            </li>
+            <!-- Repeat for other events -->
+        </ul>
+
+        <h2>Features</h2>
+        <ul>
+            <li>Advanced Search Functionality</li>
+            <li>Event Browsing Interface</li>
+            <li>Detailed Event Information</li>
+            <li>Event Submission by Organizations</li>
+            <li>Favoriting Events and Organizations</li>
+        </ul>
+    {% else %}
+        <p>Please <a href="{% url 'login' %}">login</a> to see upcoming events and features.</p>
+    {% endif %}
+
+    <h2>About ALOE Hub</h2>
+    <p>ALOE Hub aims to centralize all student organization events in one platform, making it easier for students to discover and participate in extracurricular activities.</p>
+    <p>By offering a database of events hosted by COA and LIONS organizations, this solution will allow students to filter events based on their interests, availability, and participation criteria.</p>
+    <p>The goal is to increase engagement in org activities by streamlining the event discovery process, while also providing student organizations, especially those with limited marketing resources, a more effective way to reach their target audience.</p>
+{% endblock %}
