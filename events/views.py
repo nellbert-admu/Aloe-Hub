@@ -1,3 +1,6 @@
-from django.shortcuts import render
+# events/views.py
 
-# Create your views here.
+from django.http import HttpResponse
+
+def home(request):
+    return HttpResponse("Event home page - Placeholder")
