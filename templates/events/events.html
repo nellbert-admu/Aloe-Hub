@@ -4,13 +4,13 @@
 
 {% block content %}
 <div class="container mt-5">
-    <h2 class="text-center">Events</h2>
-    <form method="GET" action="{% url 'event-list' %}" class="form-inline my-4 justify-content-center">
-        <div class="input-group">
-            <input type="text" name="q" class="form-control" placeholder="Search events..." value="{{ request.GET.q }}">
-            <div class="input-group-append">
-                <button type="submit" class="btn btn-primary">Search</button>
-            </div>
+    <h2 class="text-center mb-4">Events</h2>
+    <form method="GET" action="{% url 'event-list' %}" class="d-flex justify-content-center mb-5">
+        <div class="input-group" style="max-width: 600px;">
+            <input type="text" name="q" class="form-control rounded-pill-start" placeholder="Search events..." value="{{ request.GET.q }}" aria-label="Search events">
+            <button type="submit" class="btn btn-primary rounded-pill-end">
+                <i class="bi bi-search"></i>
+            </button>
         </div>
     </form>
     <div class="row">
