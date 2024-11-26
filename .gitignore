@@ -128,3 +128,4 @@ celerybeat-schedule.*
 *.pyc
 *.pyc
 /aloe_hub/__pycache__
+*.pyc
