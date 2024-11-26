@@ -1,9 +1,9 @@
 # events/urls.py
 
 from django.urls import path
-from . import views  # Import views when you have them
+from . import views
 
 urlpatterns = [
-    # Add a simple placeholder for now
-    path('', views.home, name='event-home'),  # Assuming you have a 'home' view in 'events/views.py'
+    path('', views.event_list, name='event-list'),
+    path('<int:event_id>/', views.event_detail, name='event-detail'),
 ]
