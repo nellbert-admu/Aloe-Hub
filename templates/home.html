@@ -6,46 +6,59 @@
 {% block content %}
 <div class="container mt-5">
     <div class="text-center">
-        <h1>Welcome to ALOE Hub</h1>
-        <p>Your one-stop platform for all Atenean-led organizational events.</p>
+        <h1 class="display-4">Welcome to ALOE Hub</h1>
+        <p class="lead">Your one-stop platform for all Atenean-led organizational events.</p>
     </div>
 
     {% if user.is_authenticated %}
-        <div class="mt-4">
-            <h2>Upcoming Events</h2>
-            <ul class="list-group">
-                <!-- Example event listing, replace with dynamic content -->
-                <li class="list-group-item">
-                    <h3>Event Title</h3>
-                    <p>Date: January 1, 2025</p>
-                    <p>Description: This is a brief description of the event.</p>
-                    <a href="" class="btn btn-primary">More details</a>
-                </li>
-                <!-- Repeat for other events -->
-            </ul>
-        </div>
-
-        <div class="mt-4">
-            <h2>Features</h2>
-            <ul class="list-group">
-                <li class="list-group-item">Advanced Search Functionality</li>
-                <li class="list-group-item">Event Browsing Interface</li>
-                <li class="list-group-item">Detailed Event Information</li>
-                <li class="list-group-item">Event Submission by Organizations</li>
-                <li class="list-group-item">Favoriting Events and Organizations</li>
-            </ul>
+        <div class="mt-5 text-center">
+            <a href="{% url 'event-list' %}" class="btn btn-primary btn-lg">Browse Events</a>
         </div>
     {% else %}
-        <div class="alert alert-info mt-4">
-            <p>Please <a href="{% url 'login' %}" class="alert-link">login</a> to see upcoming events and features.</p>
+        <div class="alert alert-info mt-5 text-center">
+            <p>Please <a href="{% url 'login' %}" class="alert-link">login</a> to browse events and features.</p>
         </div>
     {% endif %}
 
-    <div class="mt-4">
+    <div class="mt-5">
         <h2>About ALOE Hub</h2>
-        <p>ALOE Hub aims to centralize all student organization events in one platform, making it easier for students to discover and participate in extracurricular activities.</p>
-        <p>By offering a database of events hosted by COA and LIONS organizations, this solution will allow students to filter events based on their interests, availability, and participation criteria.</p>
-        <p>The goal is to increase engagement in org activities by streamlining the event discovery process, while also providing student organizations, especially those with limited marketing resources, a more effective way to reach their target audience.</p>
+        <div class="row">
+            <div class="col">
+                <p>ALOE Hub aims to centralize all student organization events in one platform, making it easier for students to discover and participate in extracurricular activities.</p>
+                <p>By offering a database of events hosted by COA and LIONS organizations, this solution will allow students to filter events based on their interests, availability, and participation criteria.</p>
+            </div>
+        </div>
+        <p class="mt-3">The goal is to increase engagement in org activities by streamlining the event discovery process, while also providing student organizations, especially those with limited marketing resources, a more effective way to reach their target audience.</p>
+    </div>
+
+    <div class="mt-5">
+        <h2>Features</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Advanced Search</h5>
+                        <p class="card-text">Find events that match your interests with our advanced search functionality.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Event Browsing</h5>
+                        <p class="card-text">Easily browse through a variety of events hosted by different organizations.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Detailed Information</h5>
+                        <p class="card-text">Get detailed information about each event, including date, time, location, and participation criteria.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}

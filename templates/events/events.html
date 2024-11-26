@@ -3,13 +3,31 @@
 {% block title %}Events{% endblock %}
 
 {% block content %}
-    <h2>Events</h2>
-    <ul>
+<div class="container mt-5">
+    <h2 class="text-center">Events</h2>
+    <form method="GET" action="{% url 'event-list' %}" class="form-inline my-4 justify-content-center">
+        <div class="input-group">
+            <input type="text" name="q" class="form-control" placeholder="Search events..." value="{{ request.GET.q }}">
+            <div class="input-group-append">
+                <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+        </div>
+    </form>
+    <div class="row">
         {% for event in events %}
-            <li>
-                <a href="{% url 'event-detail' event.id %}">{{ event.title }}</a>
-                <p>{{ event.date }} at {{ event.time }}</p>
-            </li>
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ event.title }}</h5>
+                        <p class="card-text"><strong>Date:</strong> {{ event.date }}</p>
+                        <p class="card-text"><strong>Time:</strong> {{ event.time }}</p>
+                        <p class="card-text"><strong>Location:</strong> {{ event.location }}</p>
+                        <p class="card-text"><strong>Participation:</strong> {{ event.get_participation_display }}</p>
+                        <a href="{% url 'event-detail' event.id %}" class="btn btn-secondary mt-2">See Event Details</a>
+                    </div>
+                </div>
+            </div>
         {% endfor %}
-    </ul>
+    </div>
+</div>
 {% endblock %}
