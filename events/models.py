@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class Event(models.Model):
     PARTICIPATION_CHOICES = [
@@ -13,6 +14,7 @@ class Event(models.Model):
     time = models.TimeField()
     location = models.CharField(max_length=200)
     participation = models.CharField(max_length=10, choices=PARTICIPATION_CHOICES, default='everyone')
+    favorited_by = models.ManyToManyField(User, related_name='favorited_events', blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

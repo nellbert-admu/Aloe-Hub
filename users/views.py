@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from events.models import Event
 
 # User Registration View
 def register(request):
@@ -37,4 +38,5 @@ def user_logout(request):
 
 @login_required
 def home(request):
-    return render(request, 'home.html')
+    favorited_events = request.user.favorited_events.all()
+    return render(request, 'home.html', {'favorited_events': favorited_events})

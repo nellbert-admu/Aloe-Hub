@@ -14,6 +14,28 @@
         <div class="mt-5 text-center">
             <a href="{% url 'event-list' %}" class="btn btn-primary btn-lg">Browse Events</a>
         </div>
+
+        <div class="mt-5">
+            <h2>Your Favorited Events</h2>
+            {% if favorited_events %}
+                <div class="row">
+                    {% for event in favorited_events %}
+                        <div class="col-md-4">
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ event.title }}</h5>
+                                    <p class="card-text">{{ event.date }} at {{ event.time }}</p>
+                                    <p class="card-text">{{ event.location }}</p>
+                                    <a href="{% url 'event-detail' event.id %}" class="btn btn-primary">View Details</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p>You have not favorited any events yet.</p>
+            {% endif %}
+        </div>
     {% else %}
         <div class="alert alert-info mt-5 text-center">
             <p>Please <a href="{% url 'login' %}" class="alert-link">login</a> to browse events and features.</p>

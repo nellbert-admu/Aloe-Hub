@@ -3,8 +3,24 @@
 {% block title %}{{ event.title }}{% endblock %}
 
 {% block content %}
-    <h2>{{ event.title }}</h2>
-    <p>{{ event.date }} at {{ event.time }}</p>
-    <p>{{ event.location }}</p>
-    <p>{{ event.description }}</p>
+    <div class="container">
+        <h2>{{ event.title }}</h2>
+        <p>{{ event.date }} at {{ event.time }}</p>
+        <p>{{ event.location }}</p>
+        <p>{{ event.description }}</p>
+
+        {% if user.is_authenticated %}
+            <form method="post" action="{% url 'favorite-event' event.id %}">
+                {% csrf_token %}
+                <input type="hidden" name="event_id" value="{{ event.id }}">
+                <button type="submit" class="btn btn-primary">
+                    {% if user in event.favorited_by.all %}
+                        Unfavorite Event
+                    {% else %}
+                        Favorite Event
+                    {% endif %}
+                </button>
+            </form>
+        {% endif %}
+    </div>
 {% endblock %}

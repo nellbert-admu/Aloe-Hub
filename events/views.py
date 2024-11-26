@@ -1,9 +1,12 @@
 # events/views.py
 
 from django.http import HttpResponse
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import Event
 import time
+from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
+from .forms import FavoriteEventForm
 
 def event_list(request):
     query = request.GET.get('q')
@@ -49,3 +52,43 @@ def quick_sort(events):
     middle = [x for x in events if x.date == pivot.date]
     right = [x for x in events if x.date > pivot.date]
     return quick_sort(left) + middle + quick_sort(right)
+
+@login_required
+def save_event(request, event_id):
+    event = get_object_or_404(Event, id=event_id)
+    if request.user in event.saved_by.all():
+        event.saved_by.remove(request.user)
+        saved = False
+    else:
+        event.saved_by.add(request.user)
+        saved = True
+    return JsonResponse({'saved': saved})
+
+@login_required
+def unsave_event(request, event_id):
+    event = get_object_or_404(Event, id=event_id)
+    event.saved_by.remove(request.user)
+    return JsonResponse({'unsaved': True})
+
+@login_required
+def favorite_event(request, event_id):
+    if request.method == 'POST':
+        form = FavoriteEventForm(request.POST)
+        if form.is_valid():
+            event = get_object_or_404(Event, id=form.cleaned_data['event_id'])
+            if request.user in event.favorited_by.all():
+                event.favorited_by.remove(request.user)
+                favorited = False
+                print(f"User {request.user.username} unfavorited event {event.title}")
+            else:
+                event.favorited_by.add(request.user)
+                favorited = True
+                print(f"User {request.user.username} favorited event {event.title}")
+            return redirect('event-detail', event_id=event.id)
+    return JsonResponse({'error': 'Invalid request'}, status=400)
+
+@login_required
+def unfavorite_event(request, event_id):
+    event = get_object_or_404(Event, id=event_id)
+    event.favorited_by.remove(request.user)
+    return JsonResponse({'unfavorited': True})
