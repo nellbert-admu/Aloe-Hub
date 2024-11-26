@@ -3,24 +3,44 @@
 {% block title %}{{ event.title }}{% endblock %}
 
 {% block content %}
-    <div class="container">
-        <h2>{{ event.title }}</h2>
-        <p>{{ event.date }} at {{ event.time }}</p>
-        <p>{{ event.location }}</p>
-        <p>{{ event.description }}</p>
-
-        {% if user.is_authenticated %}
-            <form method="post" action="{% url 'favorite-event' event.id %}">
-                {% csrf_token %}
-                <input type="hidden" name="event_id" value="{{ event.id }}">
-                <button type="submit" class="btn btn-primary">
-                    {% if user in event.favorited_by.all %}
-                        Unfavorite Event
-                    {% else %}
-                        Favorite Event
+<div class="container mt-5">
+    <div class="card mb-4">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-8">
+                    <h2 class="card-title">{{ event.title }}</h2>
+                    <p class="card-text text-muted">{{ event.date }} at {{ event.time }}</p>
+                    <p class="card-text"><i class="bi bi-geo-alt-fill"></i> {{ event.location }}</p>
+                    <p class="card-text">{{ event.description }}</p>
+                </div>
+                <div class="col-md-4 text-end">
+                    {% if user.is_authenticated %}
+                        <form method="post" action="{% url 'favorite-event' event.id %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="event_id" value="{{ event.id }}">
+                            <button type="submit" class="btn btn-primary btn-lg mt-3">
+                                {% if user in event.favorited_by.all %}
+                                    <i class="bi bi-heart-fill"></i> Unfavorite Event
+                                {% else %}
+                                    <i class="bi bi-heart"></i> Favorite Event
+                                {% endif %}
+                            </button>
+                        </form>
                     {% endif %}
-                </button>
-            </form>
-        {% endif %}
+                </div>
+            </div>
+        </div>
     </div>
+    <div class="card mb-4">
+        <div class="card-body">
+            <h4 class="card-title">Event Details</h4>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><strong>Date:</strong> {{ event.date }}</li>
+                <li class="list-group-item"><strong>Time:</strong> {{ event.time }}</li>
+                <li class="list-group-item"><strong>Location:</strong> {{ event.location }}</li>
+                <li class="list-group-item"><strong>Participation:</strong> {{ event.get_participation_display }}</li>
+            </ul>
+        </div>
+    </div>
+</div>
 {% endblock %}
