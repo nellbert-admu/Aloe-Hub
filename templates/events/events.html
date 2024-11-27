@@ -19,12 +19,13 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">{{ event.title }}</h5>
-                        <p class="card-text"><strong>Date:</strong> {{ event.date }}</p>
-                        <p class="card-text"><strong>Time:</strong> {{ event.time }}</p>
-                        <p class="card-text"><strong>Location:</strong> {{ event.location }}</p>
-                        <p class="card-text"><strong>Organization:</strong> {{ event.organized_by.org_code }}</p>
-                        <p class="card-text"><strong>Participation:</strong> {{ event.get_participation_display }}</p>
-                        <a href="{% url 'event-detail' event.id %}" class="btn btn-secondary mt-2">See Event Details</a>
+                        <p class="card-text">
+                            <i class="bi bi-calendar-event"></i> {{ event.date }}<br>
+                            <i class="bi bi-clock"></i> {{ event.time }}<br>
+                            <i class="bi bi-geo-alt"></i> {{ event.location }}<br>
+                            <i class="bi bi-building"></i> {{ event.organized_by.org_code }}
+                        </p>
+                        <a href="{% url 'event-detail' event.id %}" class="btn btn-secondary mt-2">See Details</a>
                     </div>
                 </div>
             </div>
