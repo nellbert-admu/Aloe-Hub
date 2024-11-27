@@ -8,6 +8,11 @@
     <form method="GET" action="{% url 'event-list' %}" class="d-flex justify-content-center mb-5">
         <div class="input-group" style="max-width: 600px;">
             <input type="text" name="q" class="form-control rounded-pill-start" placeholder="Search events..." value="{{ request.GET.q }}" aria-label="Search events">
+            <select name="sort_by" class="form-select">
+                <option value="date" {% if request.GET.sort_by == 'date' %}selected{% endif %}>Sort by Date</option>
+                <option value="title" {% if request.GET.sort_by == 'title' %}selected{% endif %}>Sort by Title</option>
+                <option value="location" {% if request.GET.sort_by == 'location' %}selected{% endif %}>Sort by Location</option>
+            </select>
             <button type="submit" class="btn btn-primary rounded-pill-end">
                 <i class="bi bi-search"></i>
             </button>

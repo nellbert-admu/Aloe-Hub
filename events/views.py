@@ -10,6 +10,7 @@ from .forms import FavoriteEventForm
 
 def event_list(request):
     query = request.GET.get('q')
+    sort_by = request.GET.get('sort_by', 'date')
     events = Event.objects.all()
     
     if query:
@@ -20,9 +21,9 @@ def event_list(request):
         print(f"Linear Search Algorithm Analysis: O(n)")
         print(f"Time taken for search: {elapsed_time:.6f} seconds")
     
-    # Sort events by date using Quick Sort
+    # Sort events by the selected category using Quick Sort
     start_time = time.time()
-    events = quick_sort(events)
+    events = quick_sort(events, sort_by)
     end_time = time.time()
     elapsed_time = end_time - start_time
     print(f"Quick Sort Algorithm Analysis: O(n log n)")
@@ -42,16 +43,22 @@ def linear_search(events, query):
             result.append(event)
     return result
 
-def quick_sort(events):
-    # Quick sort is a divide-and-conquer algorithm. It works by selecting a 'pivot' element from the array
-    # and partitioning the other elements into two sub-arrays, according to whether they are less than or greater than the pivot.
+def quick_sort(events, sort_by):
     if len(events) <= 1:
         return events
     pivot = events[len(events) // 2]
-    left = [x for x in events if x.date < pivot.date]
-    middle = [x for x in events if x.date == pivot.date]
-    right = [x for x in events if x.date > pivot.date]
-    return quick_sort(left) + middle + quick_sort(right)
+    
+    key_func = {
+        'title': lambda x: x.title,
+        'location': lambda x: x.location,
+        'date': lambda x: x.date
+    }.get(sort_by, lambda x: x.date)
+    
+    left = [x for x in events if key_func(x) < key_func(pivot)]
+    middle = [x for x in events if key_func(x) == key_func(pivot)]
+    right = [x for x in events if key_func(x) > key_func(pivot)]
+    
+    return quick_sort(left, sort_by) + middle + quick_sort(right, sort_by)
 
 @login_required
 def save_event(request, event_id):
