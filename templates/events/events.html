@@ -22,7 +22,7 @@
                         <p class="card-text"><strong>Date:</strong> {{ event.date }}</p>
                         <p class="card-text"><strong>Time:</strong> {{ event.time }}</p>
                         <p class="card-text"><strong>Location:</strong> {{ event.location }}</p>
-                        <p class="card-text"><strong>Organization:</strong> {{ event.organization.org_code }}</p>
+                        <p class="card-text"><strong>Organization:</strong> {{ event.organized_by.org_code }}</p>
                         <p class="card-text"><strong>Participation:</strong> {{ event.get_participation_display }}</p>
                         <a href="{% url 'event-detail' event.id %}" class="btn btn-secondary mt-2">See Event Details</a>
                     </div>
