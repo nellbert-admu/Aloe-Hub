@@ -36,10 +36,10 @@ def event_detail(request, event_id):
     return render(request, 'events/event_detail.html', {'event': event})
 
 def linear_search(events, query):
-    # Linear search goes through each event one by one and checks if the query is in the title or description.
+    # Linear search goes through each event title one by one and checks if the query is in the title.
     result = []
     for event in events:
-        if query.lower() in event.title.lower() or query.lower() in event.description.lower():
+        if query.lower() in event.title.lower():
             result.append(event)
     return result
 
