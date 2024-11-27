@@ -1,5 +1,13 @@
+/* Import Google Fonts and Bootstrap CSS */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+@import url('https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css');
 
+/* Override Bootstrap primary color */
+:root {
+    --bs-primary: #001196;
+}
+
+/* Global Styles */
 body {
     font-family: 'Inter', sans-serif;
     background-color: #f5f5f7;
@@ -7,6 +15,7 @@ body {
     padding-top: 56px; /* Adjust for fixed navbar */
 }
 
+/* Navbar Styles */
 .navbar {
     background-color: #ffffff;
     border-bottom: 1px solid #d1d1d6;
@@ -16,16 +25,29 @@ body {
     font-weight: 700;
 }
 
+/* Button Styles */
 .btn-primary {
-    background-color: #007aff;
-    border-color: #007aff;
+    background-color: var(--bs-primary);
+    border-color: var(--bs-primary);
 }
 
 .btn-primary:hover {
-    background-color: #0056b3;
-    border-color: #0056b3;
+    background-color: darken(var(--bs-primary), 10%);
+    border-color: darken(var(--bs-primary), 10%);
 }
 
+.btn-outline-dark:hover {
+    color: #fff;
+    background-color: #343a40;
+    border-color: #343a40;
+}
+
+.btn-lg {
+    padding: 0.75rem 1.25rem;
+    font-size: 1.25rem;
+}
+
+/* Card Styles */
 .card {
     border: none;
     border-radius: 12px;
@@ -34,16 +56,6 @@ body {
 
 .card-body {
     padding: 1.5rem;
-}
-
-.container {
-    max-width: 960px;
-}
-
-.btn-outline-dark:hover {
-    color: #fff;
-    background-color: #343a40;
-    border-color: #343a40;
 }
 
 .card-title {
@@ -56,16 +68,18 @@ body {
     line-height: 1.5;
 }
 
+/* Container Styles */
+.container {
+    max-width: 960px;
+}
+
+/* List Group Item Styles */
 .list-group-item {
     font-size: 1rem;
     padding: 0.75rem 1.25rem;
 }
 
-.btn-lg {
-    padding: 0.75rem 1.25rem;
-    font-size: 1.25rem;
-}
-
+/* Input Group Styles */
 .input-group .form-control {
     border-radius: 50px 0 0 50px;
     padding: 0.75rem 1.25rem;

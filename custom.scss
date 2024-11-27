@@ -1,0 +1,9 @@
+
+// Import Bootstrap's SCSS
+@import "~bootstrap/scss/bootstrap";
+
+// Override the primary color variable
+$primary: #001196;
+
+// Include Bootstrap to apply the changes
+@import "~bootstrap/scss/bootstrap";
