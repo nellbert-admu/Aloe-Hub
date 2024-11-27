@@ -5,14 +5,62 @@
 {% block content %}
 <div class="container mt-5">
     <h2 class="text-center mb-4">Events</h2>
-    <form method="GET" action="{% url 'event-list' %}" class="d-flex justify-content-center mb-5">
-        <div class="input-group" style="max-width: 600px;">
-            <input type="text" name="q" class="form-control rounded-pill-start" placeholder="Search events..." value="{{ request.GET.q }}" aria-label="Search events">
-            <button type="submit" class="btn btn-primary rounded-pill-end">
-                <i class="bi bi-search"></i>
-            </button>
-        </div>
-    </form>
+
+        <form method="GET" action="{% url 'event-list' %}" class="d-flex justify-content-center mb-5">
+            <div class="input-group" style="max-width: 600px;">
+                <input type="text" name="q" class="form-control rounded-pill-start" placeholder="Search events..." value="{{ request.GET.q }}" aria-label="Search events">
+                <button class="btn btn-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#filterOptions" aria-expanded="false" aria-controls="filterOptions">
+                    <i class="bi bi-funnel"></i> Filter
+                </button>
+                <button type="submit" class="btn btn-primary rounded-pill-end">
+                    <i class="bi bi-search"></i>
+                </button>
+            </div>
+        </form>  
+    
+     <div class="collapse" id="filterOptions">
+        <form method="GET" action="{% url 'event-list' %}" class="card card-body mb-4">
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <label for="eventType" class="form-label">Event Type</label>
+                    <select class="form-select" id="eventType" name="event_type">
+                        <option value="">All</option>
+                        <option value="workshop">Workshop</option>
+                        <option value="seminar">Seminar</option>
+                        <option value="social">Social</option>
+                    </select>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="timeAfter" class="form-label">Time Starts After</label>
+                    <input type="time" id="timeAfter" name="time_after" class="form-control">
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="location" class="form-label">Location</label>
+                    <input type="text" id="location" name="location" class="form-control" placeholder="e.g., Auditorium">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <label for="tags" class="form-label">Tags</label>
+                    <input type="text" id="tags" name="tags" class="form-control" placeholder="e.g., leadership, tech">
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="participation" class="form-label">Participation</label>
+                    <select class="form-select" id="participation" name="participation">
+                        <option value="">All</option>
+                        <option value="everyone">Open to All</option>
+                        <option value="ateneans">Ateneans Only</option>
+                        <option value="members">Members Only</option>
+                    </select>
+                </div>
+            </div>
+            <div class="text-end">
+                <button type="submit" class="btn btn-primary">Apply Filters</button>
+                <a href="{% url 'event-list' %}" class="btn btn-secondary">Reset Filters</a>
+            </div>
+        </form>
+    </div>
+    
     <div class="row">
         {% for event in events %}
             <div class="col-md-4 mb-4">
