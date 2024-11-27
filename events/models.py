@@ -15,6 +15,13 @@ class Event(models.Model):
     location = models.CharField(max_length=200)
     participation = models.CharField(max_length=10, choices=PARTICIPATION_CHOICES, default='everyone')
     favorited_by = models.ManyToManyField(User, related_name='favorited_events', blank=True)
+    organized_by = models.ForeignKey(
+        'organizations.Organization', 
+        on_delete=models.SET_NULL, 
+        null=True, 
+        blank=True,
+        related_name='organized_events'
+    )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

@@ -26,6 +26,7 @@
                                     <h5 class="card-title">{{ event.title }}</h5>
                                     <p class="card-text">{{ event.date }} at {{ event.time }}</p>
                                     <p class="card-text">{{ event.location }}</p>
+                                    <p class="card-text"><strong>Organization:</strong> {{ event.organized_by.org_code }}</p>
                                     <a href="{% url 'event-detail' event.id %}" class="btn btn-primary">View Details</a>
                                 </div>
                             </div>

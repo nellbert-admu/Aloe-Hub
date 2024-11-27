@@ -11,6 +11,7 @@
                     <h2 class="card-title">{{ event.title }}</h2>
                     <p class="card-text text-muted">{{ event.date }} at {{ event.time }}</p>
                     <p class="card-text"><i class="bi bi-geo-alt-fill"></i> {{ event.location }}</p>
+                    <p class="card-text"><strong>Organization:</strong> {{ event.organized_by.name }}</p>
                     <p class="card-text">{{ event.description }}</p>
                 </div>
                 <div class="col-md-4 text-end">
@@ -39,6 +40,7 @@
                 <li class="list-group-item"><strong>Time:</strong> {{ event.time }}</li>
                 <li class="list-group-item"><strong>Location:</strong> {{ event.location }}</li>
                 <li class="list-group-item"><strong>Participation:</strong> {{ event.get_participation_display }}</li>
+                <li class="list-group-item"><strong>Organization:</strong> {{ event.organization.name }}</li>
             </ul>
         </div>
     </div>
