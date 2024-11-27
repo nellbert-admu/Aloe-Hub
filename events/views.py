@@ -12,6 +12,19 @@ def event_list(request):
     query = request.GET.get('q')
     sort_by = request.GET.get('sort_by', 'date')
     events = Event.objects.all()
+
+    # Apply filters
+    if 'event_type' in request.GET and request.GET['event_type']:
+        events = events.filter(event_type=request.GET['event_type'])
+    if 'time_after' in request.GET and request.GET['time_after']:
+        events = events.filter(time__gte=request.GET['time_after'])
+    if 'location' in request.GET and request.GET['location']:
+        events = events.filter(location__icontains=request.GET['location'])
+    if 'tags' in request.GET and request.GET['tags']:
+        tags = [tag.strip() for tag in request.GET['tags'].split(',')]
+        events = events.filter(tags__name__in=tags).distinct()
+    if 'participation' in request.GET and request.GET['participation']:
+        events = events.filter(participation=request.GET['participation'])
     
     if query:
         start_time = time.time()
