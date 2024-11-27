@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from tags.models import Tag
 
 class Event(models.Model):
     PARTICIPATION_CHOICES = [
@@ -22,6 +23,7 @@ class Event(models.Model):
         blank=True,
         related_name='organized_events'
     )
+    tags = models.ManyToManyField(Tag, related_name='events')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

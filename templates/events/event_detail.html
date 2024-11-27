@@ -44,6 +44,9 @@
                 <li class="list-group-item"><strong>Location:</strong> {{ event.location }}</li>
                 <li class="list-group-item"><strong>Participation:</strong> {{ event.get_participation_display }}</li>
                 <li class="list-group-item"><strong>Organization:</strong> {{ event.organized_by.name }}</li>
+                <li class="list-group-item"><strong>Event Tags:</strong> {% for tag in event.tags.all %}
+                    {{ tag.name }}{% if not forloop.last %}, {% endif %}
+                {% endfor %}</li>
             </ul>
         </div>
     </div>
