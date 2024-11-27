@@ -40,3 +40,6 @@ def user_logout(request):
 def home(request):
     favorited_events = request.user.favorited_events.all()
     return render(request, 'home.html', {'favorited_events': favorited_events})
+
+def about(request):
+    return render(request, 'about.html')

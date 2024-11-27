@@ -35,16 +35,28 @@
             </div>
         </div>
     </div>
-    <div class="card mb-4">
-        <div class="card-body">
-            <h4 class="card-title">Event Details</h4>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item"><strong>Date:</strong> {{ event.date }}</li>
-                <li class="list-group-item"><strong>Time:</strong> {{ event.time }}</li>
-                <li class="list-group-item"><strong>Location:</strong> {{ event.location }}</li>
-                <li class="list-group-item"><strong>Participation:</strong> {{ event.get_participation_display }}</li>
-                <li class="list-group-item"><strong>Organization:</strong> {{ event.organized_by.name }}</li>
-            </ul>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h4 class="card-title">Event Details</h4>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><strong>Date:</strong> {{ event.date }}</li>
+                        <li class="list-group-item"><strong>Time:</strong> {{ event.time }}</li>
+                        <li class="list-group-item"><strong>Location:</strong> {{ event.location }}</li>
+                        <li class="list-group-item"><strong>Participation:</strong> {{ event.get_participation_display }}</li>
+                        <li class="list-group-item"><strong>Organization:</strong> {{ event.organized_by.name }}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h4 class="card-title">About the Organization</h4>
+                    <p class="card-text">{{ event.organized_by.description }}</p>
+                </div>
+            </div>
         </div>
     </div>
 </div>
