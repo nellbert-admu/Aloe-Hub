@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'users',
     'events',
-    'organizations',  # Ensure this line is present
+    'organizations',
+    'tags',  # Ensure this line is present
 ]
 
 MIDDLEWARE = [
