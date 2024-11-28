@@ -7,7 +7,7 @@ body {
 }
 
 .navbar {
-    background-color: rgba(232, 245, 233, 0.975); /* Aloe vera green with 90% opacity */
+    background-color: #e8f5e9; /* Aloe vera green */
     border-bottom: 1px solid #a5d6a7; /* Light border */
 }
 
@@ -54,6 +54,7 @@ body {
     border: none;
     border-radius: 12px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.025);
+    color: #2f4630 !important; 
 }
 
 .card-body {
@@ -68,6 +69,7 @@ body {
 .card-text {
     font-size: 1rem;
     line-height: 1.5;
+    color: #2f4630; 
 }
 
 .container {
