@@ -38,8 +38,10 @@
             {% endif %}
         </div>
     {% else %}
-        <div class="alert alert-info mt-5 text-center">
-            <p>Please <a href="{% url 'login' %}" class="alert-link">login</a> to see your favorite events.</p>
+        <div class="alert alert-info mt-5 text-center" style="border-radius: 12px; background-color: #f0f4f8; color: #333;">
+            <p style="font-size: 1.2em; margin: 0;">
+                Please <a href="{% url 'login' %}" class="alert-link" style="color: #007aff; text-decoration: none;">login</a> to see your favorite events.
+            </p>
         </div>
     {% endif %}
 

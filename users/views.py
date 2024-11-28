@@ -34,12 +34,13 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     messages.success(request, 'You have logged out successfully!')
-    return redirect('login')  # Redirect to login page after successful logout
+    return redirect('home')  # Redirect to login page after successful logout
 
-@login_required
 def home(request):
-    favorited_events = request.user.favorited_events.all()
-    return render(request, 'home.html', {'favorited_events': favorited_events})
+    context = {}
+    if request.user.is_authenticated:
+        context['favorited_events'] = request.user.favorited_events.all()
+    return render(request, 'home.html', context)
 
 def about(request):
     return render(request, 'about.html')
