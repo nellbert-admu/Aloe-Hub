@@ -4,6 +4,7 @@ from django.contrib.auth import login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from events.models import Event
+from events.views import quick_sort  # Import the quick_sort function
 
 # User Registration View
 def register(request):
@@ -34,12 +35,14 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     messages.success(request, 'You have logged out successfully!')
-    return redirect('login')  # Redirect to login page after successful logout
+    return redirect('home')  # Redirect to login page after successful logout
 
-@login_required
 def home(request):
-    favorited_events = request.user.favorited_events.all()
-    return render(request, 'home.html', {'favorited_events': favorited_events})
+    context = {}
+    if request.user.is_authenticated:
+        favorited_events = request.user.favorited_events.all()
+        context['favorited_events'] = quick_sort(list(favorited_events), 'date')  # Sort by date
+    return render(request, 'home.html', context)
 
 def about(request):
     return render(request, 'about.html')
