@@ -30,20 +30,7 @@
             {% if favorited_events %}
                 <div class="row">
                     {% for event in favorited_events %}
-                        <div class="col-md-4">
-                            <div class="card mb-4">
-                                <div class="card-body">
-                                    <h5 class="card-title">{{ event.title }}</h5>
-                                    <p class="card-text">
-                                        <i class="bi bi-calendar-event"></i> {{ event.date }}<br>
-                                        <i class="bi bi-clock"></i> {{ event.time }}<br>
-                                        <i class="bi bi-geo-alt"></i> {{ event.location }}<br>
-                                        <i class="bi bi-building"></i> {{ event.organized_by.org_code }}
-                                    </p>
-                                    <a href="{% url 'event-detail' event.id %}" class="btn btn-secondary mt-2">See Details</a>
-                                </div>
-                            </div>
-                        </div>
+                        {% include 'partials/event_card.html' %}
                     {% endfor %}
                 </div>
             {% else %}

@@ -77,23 +77,6 @@ def quick_sort(events, sort_by):
     return quick_sort(left, sort_by) + middle + quick_sort(right, sort_by)  # List
 
 @login_required
-def save_event(request, event_id):
-    event = get_object_or_404(Event, id=event_id)  # Event instance
-    if request.user in event.saved_by.all():  # QuerySet
-        event.saved_by.remove(request.user)
-        saved = False
-    else:
-        event.saved_by.add(request.user)
-        saved = True
-    return JsonResponse({'saved': saved})  # Dictionary
-
-@login_required
-def unsave_event(request, event_id):
-    event = get_object_or_404(Event, id=event_id)  # Event instance
-    event.saved_by.remove(request.user)
-    return JsonResponse({'unsaved': True})  # Dictionary
-
-@login_required
 def favorite_event(request, event_id):
     if request.method == 'POST':
         form = FavoriteEventForm(request.POST)  # FavoriteEventForm instance

@@ -68,34 +68,8 @@
     
     <div class="row" id="event-cards">
         {% for event in events %}
-            <div class="col-md-4 mb-4 event-card">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ event.title }}</h5>
-                        <p class="card-text">
-                            <i class="bi bi-calendar-event"></i> {{ event.date }}<br>
-                            <i class="bi bi-clock"></i> {{ event.time }}<br>
-                            <i class="bi bi-geo-alt"></i> {{ event.location }}<br>
-                            <i class="bi bi-building"></i> {{ event.organized_by.org_code }}
-                        </p>
-                        <a href="{% url 'event-detail' event.id %}" class="btn btn-secondary mt-2">See Details</a>
-                    </div>
-                </div>
-            </div>
+            {% include 'partials/event_card.html' %}
         {% endfor %}
     </div>
 </div>
-
-<!-- GSAP Animation Script -->
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        gsap.from(".event-card", {
-            duration: 0.5,
-            opacity: 0,
-            y: 50,
-            stagger: 0.1,
-            ease: "power1.out"
-        });
-    });
-</script>
 {% endblock %}
