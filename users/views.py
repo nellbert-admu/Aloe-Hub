@@ -4,6 +4,7 @@ from django.contrib.auth import login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from events.models import Event
+from events.views import quick_sort  # Import the quick_sort function
 
 # User Registration View
 def register(request):
@@ -39,7 +40,8 @@ def user_logout(request):
 def home(request):
     context = {}
     if request.user.is_authenticated:
-        context['favorited_events'] = request.user.favorited_events.all()
+        favorited_events = request.user.favorited_events.all()
+        context['favorited_events'] = quick_sort(list(favorited_events), 'date')  # Sort by date
     return render(request, 'home.html', context)
 
 def about(request):
