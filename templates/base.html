@@ -11,6 +11,19 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+    <style>
+        body, html {
+            height: 100%;
+        }
+        .content-wrapper {
+            min-height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .content {
+            flex: 1;
+        }
+    </style>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: rgba(232, 245, 233, 0.975);">
@@ -44,37 +57,39 @@
         </div>
     </nav>
     
-    <div class="container mt-1 pt-3">
-        {% if messages %}
-            <div class="mt-3">
-                {% for message in messages %}
-                    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
-                        <p style="font-size: 1em; margin: 0;">{{ message }}</p>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                {% endfor %}
+    <div class="content-wrapper">
+        <div class="container mt-1 pt-3 content">
+            {% if messages %}
+                <div class="mt-3">
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                            <p style="font-size: 1em; margin: 0;">{{ message }}</p>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            {% if request.path != '/' and request.path != '/login/' and request.path != '/register/' %}
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb small">
+                        <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                        {% block breadcrumbs %}{% endblock %}
+                    </ol>
+                </nav>
+            {% endif %}
+            {% block content %}{% endblock %}
+        </div>
+        
+        <footer class="footer mt-auto pt-3">
+            <div class="d-flex justify-content-center mt-3">
+                <div class="p-2 mx-2 rounded" style="background: rgba(0, 115, 0, 0.2) 25%; color: transparent; -webkit-background-clip: text;">Isabella Gregorio</div>
+                <div class="p-2 mx-2 rounded" style="background: rgba(0, 115, 0, 0.2) 25%; color: transparent; -webkit-background-clip: text;">Nellbert Ethan Pineda</div>
             </div>
-        {% endif %}
-        {% if request.path != '/' and request.path != '/login/' and request.path != '/register/' %}
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb small">
-                    <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
-                    {% block breadcrumbs %}{% endblock %}
-                </ol>
-            </nav>
-        {% endif %}
-        {% block content %}{% endblock %}
+            <div class="d-none d-sm-block position-relative overflow-hidden text-center text-wrap text-truncate" style="font-weight: 900; line-height: 1; color: transparent; background: linear-gradient(to bottom, rgba(0, 115, 0, 0.1) 25%, rgba(0, 115, 0, 0) 100%); -webkit-background-clip: text; font-size: 14vw;">
+                ALOE Hub
+            </div>
+        </footer>
     </div>
-    
-    <footer class="footer">
-        <div class="d-flex justify-content-center mt-3">
-            <div class="p-2 mx-2 rounded" style="background: rgba(0, 115, 0, 0.2) 25%; color: transparent; -webkit-background-clip: text;">Isabella Gregorio</div>
-            <div class="p-2 mx-2 rounded" style="background: rgba(0, 115, 0, 0.2) 25%; color: transparent; -webkit-background-clip: text;">Nellbert Ethan Pineda</div>
-        </div>
-        <div class="d-none d-sm-block position-relative overflow-hidden text-center text-wrap text-truncate" style="font-weight: 900; line-height: 1; color: transparent; background: linear-gradient(to bottom, rgba(0, 115, 0, 0.1) 25%, rgba(0, 115, 0, 0) 100%); -webkit-background-clip: text; font-size: 14vw;">
-            ALOE Hub
-        </div>
-    </footer>
     
     <!-- GSAP Animation Script -->
     <script>
