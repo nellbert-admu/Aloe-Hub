@@ -3,7 +3,10 @@
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Event
+from organizations.models import Organization
+from tags.models import Tag
 import time
+from datetime import datetime
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from .forms import FavoriteEventForm
@@ -11,20 +14,31 @@ from .forms import FavoriteEventForm
 def event_list(request):
     query = request.GET.get('q')
     sort_by = request.GET.get('sort_by', 'date')
-    events = Event.objects.all()  # QuerySet
+    events = Event.objects.all()
+    tags = list(Tag.objects.all())
+    event_type_tags = [tag for tag in tags if tag.tag_category == 'event_type']
+    event_theme_tags = [tag for tag in tags if tag.tag_category == 'event_theme']
+    organizations = Organization.objects.all()
+    
+    selected_event_type = request.GET.get('event_type')
+    selected_event_themes = request.GET.getlist('event_themes')
+    location = request.GET.get('location', '').strip()
+    participation = request.GET.get('participation')
+    time_after = request.GET.get('time_after')
+    selected_organization = request.GET.get('organization')
 
-    # Apply filters
-    if 'event_type' in request.GET and request.GET['event_type']:
-        events = events.filter(event_type=request.GET['event_type'])  # QuerySet
-    if 'time_after' in request.GET and request.GET['time_after']:
-        events = events.filter(time__gte=request.GET['time_after'])  # QuerySet
-    if 'location' in request.GET and request.GET['location']:
-        events = events.filter(location__icontains(request.GET['location']))  # QuerySet
-    if 'tags' in request.GET and request.GET['tags']:
-        tags = [tag.strip() for tag in request.GET['tags'].split(',')]  # List
-        events = events.filter(tags__name__in=tags).distinct()  # QuerySet
-    if 'participation' in request.GET and request.GET['participation']:
-        events = events.filter(participation=request.GET['participation'])  # QuerySet
+    if selected_event_type:
+        events = filter_by_event_type(events, selected_event_type)
+    if selected_event_themes:
+        events = filter_by_event_themes(events, selected_event_themes)
+    if location:
+        events = filter_by_location(events, location)
+    if participation:
+        events = filter_by_participation(events, participation)
+    if time_after:
+        events = filter_by_time_after(events, time_after)
+    if selected_organization:
+        events = filter_by_organization(events, selected_organization)
     
     if query:
         start_time = time.time()
@@ -44,7 +58,48 @@ def event_list(request):
     print(f"Time taken for sorting: {elapsed_time:.6f} seconds")
     print(f"Space complexity for sorting: O(n log n)")
 
-    return render(request, 'events/events.html', {'events': events})  # Dictionary
+    return render(request, 'events/events.html', {
+        'events': events, 
+        'event_type_tags': event_type_tags, 
+        'event_theme_tags': event_theme_tags,
+        'organizations': organizations})
+
+def filter_by_event_type(events, selected_event_type):
+    return [
+        event for event in events 
+        if selected_event_type in [tag.name for tag in event.tags.all()]
+    ]
+
+def filter_by_event_themes(events, selected_event_themes):
+    return [
+        event for event in events 
+        if any(tag.name in selected_event_themes for tag in event.tags.all())
+    ]
+
+def filter_by_time_after(events, time_after):
+    time_after = datetime.strptime(time_after, "%H:%M").time()
+    return [
+        event for event in events 
+        if event.time >= time_after
+    ]
+
+def filter_by_location(events, location):
+    return [
+        event for event in events 
+        if location.lower() in event.location.lower()
+    ]
+
+def filter_by_participation(events, participation):
+    return [
+        event for event in events 
+        if event.participation == participation
+    ]
+
+def filter_by_organization(events, selected_organization):
+    return [
+        event for event in events
+        if event.organized_by and event.organized_by.name == selected_organization
+    ]
 
 def event_detail(request, event_id):
     event = get_object_or_404(Event, id=event_id)  # Event instance
