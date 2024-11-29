@@ -32,26 +32,44 @@
             <div class="row">
                 <div class="col-md-4 mb-3">
                     <label for="eventType" class="form-label">Event Type</label>
-                    <select class="form-select" id="eventType" name="event_type">
-                        <option value="">All</option>
-                        <option value="workshop">Workshop</option>
-                        <option value="seminar">Seminar</option>
-                        <option value="social">Social</option>
+                    <select name="event_type" class="form-select">
+                        <option value="">-- Select Event Type --</option>
+                        {% for tag in event_type_tags %}
+                            <option value="{{ tag.name }}" {% if tag.name == request.GET.event_type %}selected{% endif %}>
+                                {{ tag.name }}
+                            </option>
+                        {% endfor %}
                     </select>
                 </div>
                 <div class="col-md-4 mb-3">
                     <label for="timeAfter" class="form-label">Time Starts After</label>
-                    <input type="time" id="timeAfter" name="time_after" class="form-control">
+                    <input type="time" id="timeAfter" name="time_after" value="{{ request.GET.time_after }}" class="form-control">
                 </div>
                 <div class="col-md-4 mb-3">
                     <label for="location" class="form-label">Location</label>
-                    <input type="text" id="location" name="location" class="form-control" placeholder="e.g., Auditorium">
+                    <input type="text" id="location" name="location" value="{{ request.GET.location }}" class="form-control" placeholder="e.g., Bellarmine Field">
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-4 mb-3">
-                    <label for="tags" class="form-label">Tags</label>
-                    <input type="text" id="tags" name="tags" class="form-control" placeholder="e.g., leadership, tech">
+                    <label class="form-label">Event Themes</label>
+                    <div class="card p-3" style="max-height: 300px; overflow-y: auto;">
+                        {% for tag in event_theme_tags %}
+                            <div class="form-check">
+                                <input 
+                                    class="form-check-input" 
+                                    type="checkbox" 
+                                    name="event_themes" 
+                                    value="{{ tag.name }}" 
+                                    id="theme{{ tag.id }}" 
+                                    {% if tag.name in request.GET.getlist.event_themes %}checked{% endif %}
+                                >
+                                <label class="form-check-label" for="theme{{ tag.id }}">
+                                    {{ tag.name }}
+                                </label>
+                            </div>
+                        {% endfor %}
+                    </div>
                 </div>
                 <div class="col-md-4 mb-3">
                     <label for="participation" class="form-label">Participation</label>
@@ -62,7 +80,19 @@
                         <option value="members">Members Only</option>
                     </select>
                 </div>
+                <div class="col-md-4 mb-3">
+                    <label for="organization" class="form-label">Organization</label>
+                    <select name="organization" class="form-select">
+                        <option value="">-- Select Organization --</option>
+                        {% for organization in organizations %}
+                            <option value="{{ organization.name }}" {% if organization.name == request.GET.organization %}selected{% endif %}>
+                                {{ organization.name }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
             </div>
+
             <div class="text-end">
                 <button type="submit" class="btn btn-primary">Apply Filters</button>
                 <a href="{% url 'event-list' %}" class="btn btn-secondary">Reset Filters</a>
