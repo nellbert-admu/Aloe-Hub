@@ -11,7 +11,7 @@
     <h2 class="text-center mb-4">Events</h2>
 
     <form method="GET" action="{% url 'event-list' %}" class="d-flex justify-content-center mb-5">
-        <div class="input-group" style="max-width: 600px;">
+        <div class="input-group" style="max-width: 600px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border-radius: 50px;">
             <input type="text" name="q" class="form-control rounded-pill-start" placeholder="Search events..." value="{{ request.GET.q }}" aria-label="Search events">
             <select name="sort_by" class="form-select">
                 <option value="date" {% if request.GET.sort_by == 'date' %}selected{% endif %}>Sort by Date</option>
