@@ -2,8 +2,13 @@
 
 {% block title %}{{ event.title }}{% endblock %}
 
+{% block breadcrumbs %}
+<li class="breadcrumb-item"><a href="{% url 'event-list' %}">Events</a></li>
+<li class="breadcrumb-item active" aria-current="page">{{ event.title }}</li>
+{% endblock %}
+
 {% block content %}
-<div class="container mt-5">
+<div class="container mt-1">
     <div class="card mb-4">
         <div class="card-body">
             <div class="row">

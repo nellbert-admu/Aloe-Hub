@@ -114,3 +114,22 @@ body {
     background-color: #fff; /* Light aloe vera green */
     color: #333;
 }
+
+a {
+    color: #007300; /* Adjust the color to fit the color scheme */
+    text-decoration: none; /* Remove underline */
+}
+a:hover {
+    color: #005500; /* Darker shade for hover effect */
+    text-decoration: underline; /* Optional: Add underline on hover */
+}
+
+.breadcrumb a {
+    color: #2f4630 !important; /* Match the color scheme */
+    text-decoration: none !important; /* Remove underline */
+}
+
+.breadcrumb a:hover {
+    color: #005500 !important; /* Darker shade for hover effect */
+    text-decoration: underline !important; /* Optional: Add underline on hover */
+}
