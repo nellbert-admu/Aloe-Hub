@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-iuejqf#e@ojn4ixyo-k2aurl7h8!^k7$x18aq^(v1zdibaq*$r
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['aloe-hub-production-092f.up.railway.app']
 
 
 # Application definition
