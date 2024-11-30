@@ -1,0 +1,126 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+body {
+    font-family: 'Lato', sans-serif;
+    background-color: #e8f5e9; /* Light aloe vera green */
+    color: #2f4630;
+    padding-top: 56px; /* Adjust for fixed navbar */
+}
+
+.navbar{
+    background-color: rgba(232, 245, 233, 0.975); /* Aloe vera green with 90% opacity */
+    border-bottom: 1px solid #a5d6a7; /* Light border */
+}
+
+.navbar-brand, .nav-link {
+    color: #2f4630 !important;
+}
+
+.nav-link.btn {
+    color: #e8f5e9 !important; /* Aloe vera green */
+    background-color: #2f4630 !important;
+}
+
+.btn-primary {
+    background-color: #4caf50; /* Aloe vera green */
+    border-color: #4caf50;
+}
+
+.btn-primary:hover {
+    background-color: #388e3c; /* Darker aloe vera green */
+    border-color: #388e3c;
+}
+
+.btn-primary:active, .btn-primary:focus {
+    background-color: #388e3c !important;  /* Darker aloe vera green */
+    border-color: #388e3c!important;
+}
+
+.btn-secondary {
+    background-color: #81c784; /* Light aloe vera green */
+    border-color: #81c784;
+}
+
+.btn-secondary:hover {
+    background-color: #66bb6a; /* Medium aloe vera green */
+    border-color: #66bb6a;
+}
+
+.btn-secondary:active, .btn-secondary:focus {
+    background-color: #66bb6a !important; /* Medium aloe vera green */
+    border-color: #66bb6a !important;
+}
+
+.card {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.025);
+    color: #2f4630 !important; 
+}
+
+.card-body {
+    padding: 1.5rem;
+}
+
+.card-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+}
+
+.card-text {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #2f4630; 
+}
+
+.container {
+    max-width: 960px;
+    margin-top: 80px;
+}
+
+.btn-outline-dark:hover {
+    color: #fff;
+    background-color: #388e3c; /* Darker aloe vera green */
+    border-color: #388e3c;
+}
+
+.list-group-item {
+    font-size: 1rem;
+    padding: 0.75rem 1.25rem;
+}
+
+.btn-lg {
+    padding: 0.75rem 1.25rem;
+    font-size: 1.25rem;
+}
+
+.input-group .form-control {
+    border-radius: 50px 0 0 50px;
+    padding: 0.75rem 1.25rem;
+    font-size: 1rem;
+}
+
+.input-group .btn {
+    border-radius: 0 50px 50px 0;
+    padding: 0.75rem 1.25rem;
+    font-size: 1rem;
+}
+
+.input-group .btn .bi-search {
+    font-size: 1.25rem;
+}
+
+.alert {
+    border-radius: 12px;
+    background-color: #fff; /* Light aloe vera green */
+    color: #333;
+}
+
+.breadcrumb a {
+    color: #548b57 !important; /* Match the color scheme */
+    text-decoration: none !important; /* Remove underline */
+}
+
+.breadcrumb a:hover {
+    color: #548b57 !important; /* Darker shade for hover effect */
+    text-decoration: underline !important; /* Optional: Add underline on hover */
+}
