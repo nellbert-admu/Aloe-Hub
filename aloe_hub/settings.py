@@ -24,9 +24,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-iuejqf#e@ojn4ixyo-k2aurl7h8!^k7$x18aq^(v1zdibaq*$r'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['aloe-hub-production-092f.up.railway.app']
+ALLOWED_HOSTS = ['aloe-hub-production-092f.up.railway.app',
+                 'localhost']
 
 
 # Application definition
@@ -41,7 +42,7 @@ INSTALLED_APPS = [
     'users',
     'events',
     'organizations',
-    'tags',  # Ensure this line is present
+    'tags', 
 ]
 
 MIDDLEWARE = [
@@ -61,7 +62,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            BASE_DIR / 'templates',  # This is the path where your base.html will be
+            BASE_DIR / 'templates', 
         ],
         'APP_DIRS': True,
         'OPTIONS': {
